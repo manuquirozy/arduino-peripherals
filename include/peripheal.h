@@ -11,8 +11,9 @@ class Peripheal {
         String setName(String name);
         uint16_t getId();
         uint16_t setId(uint16_t id);
-
 };
+
+Peripheal::Peripheal(){};
 
 Peripheal::Peripheal(String name, uint16_t id=random(0, 0xFFFF)) {
     this->name = name;

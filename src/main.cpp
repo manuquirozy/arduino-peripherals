@@ -1,19 +1,22 @@
 #include <Arduino.h>
-#include "peripheal.h"
+#include <sensor.h>
 
-Peripheal sensor = Peripheal();
+Sensor sensor = Sensor(String("lm35"), String("°C"));
+
+float readTemp(int var){
+  return (float(analogRead(0)/1023.0)*5.0);
+}
 
 void setup() {
   Serial.begin(115200);
-  sensor.setName(String("lm35"));
-  sensor.setId(10);
+  sensor.attach(readTemp);
 }
 
 void loop() {
-  sensor.getName();
-  sensor.getId();
+  
+  Serial.println(sensor.run(0));
   while(1){
-    ;;
+
   }
 }
 
