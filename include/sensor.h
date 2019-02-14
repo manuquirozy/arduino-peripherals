@@ -1,6 +1,3 @@
-#include <Arduino.h>
-#include "peripheal.h"
-#include "task.h"
 
 class Sensor: public Peripheal, public Task<float, int> {
 private:

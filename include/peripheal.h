@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <ArduinoJson.h>
 
 class Peripheal {
     private:
@@ -11,6 +12,7 @@ class Peripheal {
         String setName(String name);
         uint16_t getId();
         uint16_t setId(uint16_t id);
+        void report(Stream &uart);
 };
 
 Peripheal::Peripheal(){};
@@ -29,9 +31,19 @@ uint16_t Peripheal::getId() {
 }
 
 String Peripheal::setName(String name) {
-    this->name = name;
+    return this->name = name;
 }
 
 uint16_t Peripheal::setId(uint16_t id) {
-    this->id = id;
+    return this->id = id;
 }
+
+void Peripheal::report(Stream &uart){
+    StaticJsonBuffer<200> jsonBuffer;
+    JsonObject& res = jsonBuffer.createObject();
+    res["name"] = this->getName();
+    res["id"] = this->getId();
+    String out;
+    res.prettyPrintTo(out);
+    uart.println(out);
+};
