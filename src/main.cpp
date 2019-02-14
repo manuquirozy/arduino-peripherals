@@ -1,11 +1,8 @@
 #include <Arduino.h>
 #include <sensor.h>
+#include "functions.h"
 
 Sensor sensor = Sensor(String("lm35"), String("°C"));
-
-float readTemp(int var){
-  return (float(analogRead(0)/1023.0)*5.0);
-}
 
 void setup() {
   Serial.begin(115200);
@@ -13,7 +10,6 @@ void setup() {
 }
 
 void loop() {
-  
   Serial.println(sensor.run(0));
   while(1){
 
